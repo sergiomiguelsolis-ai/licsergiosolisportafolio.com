@@ -1,8 +1,8 @@
 import { cn } from '../lib/motion'
 
 /** The "I" of SOLÍS carrying the red acute accent — the identity's signature. */
-export function AccentI() {
-  return <span className="accent-i">I</span>
+export function AccentI({ className }: { className?: string }) {
+  return <span className={cn('accent-i', className)}>I</span>
 }
 
 export default function Wordmark({ className }: { className?: string }) {

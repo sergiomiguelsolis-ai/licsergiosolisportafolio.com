@@ -265,6 +265,9 @@
     margin: -0.2em -0.1em -0.28em;
   }
   .spot-inverse { --spot-base: var(--color-paper); }
+  /* An accented I that carries its own .spot fill has .spot's extra bottom
+     padding, which the accent is positioned from — compensate for it. */
+  .accent-i.spot::after { bottom: calc(1.02em + 0.28em); }
 
   /* Red underline that draws on hover of the parent .group */
   .hover-underline {

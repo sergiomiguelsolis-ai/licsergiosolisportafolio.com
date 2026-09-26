@@ -1,7 +1,9 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
-import '@fontsource-variable/inter/opsz.css'
+// Standard weight-axis build: the optical-size (opsz) build renders every
+// weight as regular in Safari/WebKit.
+import '@fontsource-variable/inter/wght.css'
 import '@fontsource/instrument-serif/400.css'
 import '@fontsource/instrument-serif/400-italic.css'
 import './styles/index.css'

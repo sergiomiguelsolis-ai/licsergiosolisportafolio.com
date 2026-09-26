@@ -147,7 +147,10 @@ export default function Hero() {
             {/* optical alignment: cancel the trailing negative tracking at the right margin */}
             <NameLine delay={D + 0.08} className="mr-[-0.045em]">
               SOL
-              <AccentI />S
+              {/* The I is position:relative (for its accent). Safari won't paint a
+                  positioned child through the parent's background-clip:text, so
+                  it carries its own .spot fill — same color, same cursor halo. */}
+              <AccentI className="spot" />S
             </NameLine>
           </span>
         </div>
