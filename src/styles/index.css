@@ -1,0 +1,306 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   SERGIO SOLÍS — Visual system
+   See DESIGN.md for the reasoning behind every token.
+   ========================================================================== */
+
+@theme {
+  /* Color — predominantly paper/ink; red is an accent, never a surface */
+  --color-paper: #f7f7f5;
+  --color-ink: #111111;
+  --color-white: #ffffff;
+  --color-red: #c8102e;
+  --color-muted: #707070;
+  --color-line: #dcdcdc;
+
+  --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-inout: cubic-bezier(0.76, 0, 0.24, 1);
+
+  --animate-scrollcue: scrollcue 2s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+  --animate-pulse-dot: pulsedot 2.4s ease-out infinite;
+
+  @keyframes scrollcue {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(200%); }
+  }
+  @keyframes pulsedot {
+    0% { box-shadow: 0 0 0 0 rgb(200 16 46 / 0.45); }
+    70%, 100% { box-shadow: 0 0 0 7px rgb(200 16 46 / 0); }
+  }
+}
+
+@layer base {
+  :root {
+    /* Grid + spacing (8px base) */
+    --gutter: clamp(1rem, 3vw, 3.5rem);
+    --gap: clamp(0.75rem, 1.5vw, 1.5rem);
+    --section-y: clamp(5.75rem, 10.5vw, 10.5rem);
+  }
+
+  html {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.55;
+    background: var(--color-paper);
+    min-height: 100svh;
+  }
+
+  ::selection {
+    background: var(--color-red);
+    color: var(--color-white);
+  }
+
+  [id] { scroll-margin-top: 3.5rem; }
+
+  :focus-visible {
+    outline: 2px solid var(--color-red);
+    outline-offset: 3px;
+  }
+
+  /* Custom cursor is only enabled on fine pointers (see Cursor.tsx) */
+  html.has-cursor,
+  html.has-cursor * { cursor: none !important; }
+}
+
+@layer components {
+  /* --- Dark sections ------------------------------------------------------
+     Swaps the palette tokens inside the section, so every utility that
+     reads them (text-ink, bg-ink rules, text-muted, border-line, .spot…)
+     inverts automatically. Red stays red. */
+  .theme-dark {
+    --color-ink: #f7f7f5;
+    --color-paper: #111111;
+    --color-muted: #9b9b98;
+    --color-line: rgb(247 247 245 / 0.16);
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+  }
+
+  /* --- Layout ------------------------------------------------------------ */
+  .shell {
+    width: 100%;
+    max-width: 1800px;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .grid-editorial {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: var(--gap);
+  }
+  @media (min-width: 768px) {
+    .grid-editorial { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  }
+
+  .section { padding-block: var(--section-y); }
+
+  /* --- Type scale -------------------------------------------------------- */
+  .label {
+    font-size: 11px;
+    line-height: 1.3;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .label-lg {
+    font-size: 12px;
+    line-height: 1.3;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .t-hero {
+    font-size: clamp(4.25rem, min(22.5vw, 34svh), 24rem);
+    line-height: 0.8;
+    letter-spacing: -0.06em;
+    font-weight: 780;
+  }
+  @media (min-width: 768px) {
+    .t-hero { font-size: clamp(4.5rem, min(18.2vw, 36svh), 24rem); }
+  }
+
+  .t-d1 {
+    font-size: clamp(2.75rem, 10vw, 11rem);
+    line-height: 0.86;
+    letter-spacing: -0.055em;
+    font-weight: 600;
+  }
+  .t-poster {
+    font-size: clamp(2.25rem, 10.5vw, 10.5rem);
+    line-height: 0.88;
+    letter-spacing: -0.055em;
+    font-weight: 600;
+  }
+  @media (min-width: 768px) {
+    .t-poster { font-size: clamp(2.25rem, 9vw, 10.5rem); }
+  }
+  .t-d2 {
+    font-size: clamp(2.25rem, 5.4vw, 6.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.045em;
+    font-weight: 600;
+  }
+  .t-num {
+    font-size: clamp(3rem, 8vw, 9rem);
+    line-height: 0.8;
+    letter-spacing: -0.06em;
+    font-weight: 300;
+    font-variant-numeric: tabular-nums;
+  }
+  .t-h1 {
+    font-size: clamp(1.75rem, 3.2vw, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    font-weight: 500;
+  }
+  .t-h2 {
+    font-size: clamp(1.375rem, 2vw, 2.25rem);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    font-weight: 500;
+  }
+  .t-lead-xl {
+    font-size: clamp(1.375rem, 2.4vw, 2.5rem);
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    font-weight: 400;
+  }
+  .t-lead {
+    font-size: clamp(1.125rem, 1.45vw, 1.5rem);
+    line-height: 1.38;
+    letter-spacing: -0.015em;
+    font-weight: 400;
+  }
+
+  /* Editorial serif — used sparingly, one word at a time */
+  .serif-i {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  /* Instrument Serif ships a single weight; a same-color stroke gives a crisp
+     "bold" instead of the browser's smeared synthetic bold. */
+  .serif-i-bold {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    font-synthesis: none;
+    letter-spacing: 0;
+    -webkit-text-stroke: 0.045em currentColor;
+    paint-order: stroke fill;
+  }
+
+  /* --- Graphic system ---------------------------------------------------- */
+
+  /* The red acute accent over the "I" of SOLÍS — the identity's signature mark */
+  .accent-i {
+    position: relative;
+    display: inline;
+  }
+  .accent-i::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 1.02em;
+    width: 0.24em;
+    height: 0.12em;
+    min-width: 5px;
+    min-height: 3px;
+    transform: translateX(-30%);
+    background: var(--color-red);
+    clip-path: polygon(58% 0, 100% 0, 42% 100%, 0 100%);
+  }
+
+  /* Line mask for reveal animations — padding keeps accents (Í, Ñ) and
+     descenders (g, p, y) inside the mask at tight display line-heights.
+     Lines start at translateY(130%) so nothing peeks through the padding. */
+  .mask-line {
+    display: block;
+    overflow: hidden;
+    padding: 0.16em 0.08em 0.24em;
+    margin: -0.16em -0.08em -0.24em;
+  }
+
+  /* Cursor spotlight for high-hierarchy bold titles.
+     The glyphs are filled with a red radial gradient centred on the cursor
+     (--sx/--sy, set per element by useSpotlight) over their base color.
+     Padding + negative margin widen the painted box so accents, descenders
+     and italic overhangs aren't clipped by background-clip: text. */
+  .spot {
+    --sx: -9999px;
+    --sy: -9999px;
+    --spot-base: var(--color-ink);
+    --spot-r: 0.95em;
+    color: transparent;
+    background-image:
+      radial-gradient(
+        circle var(--spot-r) at var(--sx) var(--sy),
+        var(--color-red) 0%,
+        var(--color-red) 22%,
+        rgb(200 16 46 / 0) 78%
+      ),
+      linear-gradient(var(--spot-base), var(--spot-base));
+    -webkit-background-clip: text;
+    background-clip: text;
+    padding: 0.2em 0.1em 0.28em;
+    margin: -0.2em -0.1em -0.28em;
+  }
+  .spot-inverse { --spot-base: var(--color-paper); }
+
+  /* Red underline that draws on hover of the parent .group */
+  .hover-underline {
+    background-image: linear-gradient(var(--color-red), var(--color-red));
+    background-repeat: no-repeat;
+    background-size: 0% 0.055em;
+    background-position: 0 94%;
+    transition: background-size 0.9s var(--ease-expo);
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+  .group:hover .hover-underline,
+  .group:focus-visible .hover-underline { background-size: 100% 0.055em; }
+
+  /* Arrow swap micro-interaction (see Arrow.tsx) */
+  .arrow-a,
+  .arrow-b {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.6s var(--ease-expo);
+  }
+  .arrow-b { transform: translate(calc(var(--dx) * -1), calc(var(--dy) * -1)); }
+  .group:hover .arrow-a,
+  .group:focus-visible .arrow-a { transform: translate(var(--dx), var(--dy)); }
+  .group:hover .arrow-b,
+  .group:focus-visible .arrow-b { transform: translate(0%, 0%); }
+
+  /* Layout guides inside image placeholders — a nod to print margins */
+  .guides {
+    background-image: repeating-linear-gradient(
+      90deg,
+      rgb(200 16 46 / 0.1) 0 1px,
+      transparent 1px calc(100% / 6)
+    );
+  }
+}
