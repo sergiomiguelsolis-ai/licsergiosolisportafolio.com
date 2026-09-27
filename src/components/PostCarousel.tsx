@@ -7,8 +7,9 @@ import { Arrow } from './Arrow'
 /**
  * A strip of pieces drifting right-to-left in an endless loop. The set is
  * rendered twice and the track slides by exactly -50%, so the restart is
- * invisible. Hover or keyboard focus pauses it; a click opens the piece
- * enlarged (arrows, swipe and Esc inside). Under reduced motion it becomes
+ * invisible. A click opens the piece
+ * enlarged (arrows, swipe and Esc inside). It only pauses while a piece is
+ * enlarged — otherwise it always runs. Under reduced motion it becomes
  * a plain horizontally scrollable row.
  */
 export default function PostCarousel({
@@ -75,7 +76,7 @@ export default function PostCarousel({
           style={{ animationDuration: `${n * 6.5}s` }}
           className={cn(
             'flex w-max py-1',
-            !reduce && 'animate-marquee group-hover/marquee:[animation-play-state:paused] group-focus-within/marquee:[animation-play-state:paused]',
+            !reduce && 'animate-marquee',
             open !== null && '[animation-play-state:paused]',
           )}
         >

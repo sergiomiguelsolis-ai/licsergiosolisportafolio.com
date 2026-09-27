@@ -152,10 +152,12 @@ a su vecino.
   el dedo mientras toca/arrastra; al soltar, el halo crece un poco y se
   desvanece (`--spot-k`), dejando un destello.
 - Inclinación (`useTilt`): el nombre del hero se inclina en profundidad
-  (±10 px, ±6°) y las partículas “caen” hacia el lado bajo. Se calibra con la
-  primera lectura. En navegadores que piden permiso del sensor (iPhone, Chrome
-  reciente) aparece el botón “Inclina tu teléfono”; en los demás se oculta al
-  detectar la primera inclinación.
+  (±10 px, ±6°) y las partículas “caen” hacia el lado bajo. Escucha el sensor de
+  inmediato; usa el giroscopio (`deviceorientation`) y, si no entrega datos
+  (Android sin giroscopio), la gravedad del acelerómetro (`devicemotion`). Se
+  calibra con la primera lectura. Solo si no llega ningún dato y el navegador
+  pide permiso (iPhone) aparece “Toca para activar”; si no, una pista
+  “Inclina tu teléfono” que desaparece al primer movimiento.
 - Menú: línea roja de progreso de lectura bajo la barra y número de sección
   (02 / 07) junto a “Menú” en la home.
 - Botón flotante “Hablemos” (WhatsApp) abajo a la derecha: aparece al pasar el

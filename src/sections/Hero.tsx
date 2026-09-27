@@ -88,7 +88,7 @@ export default function Hero() {
   const nameY = useTransform(ty, (v) => v * 6)
   const nameRotY = useTransform(tx, (v) => v * 6)
   const nameRotX = useTransform(ty, (v) => v * -5)
-  const showTiltChip = mobile && !tilt.moved && (tilt.needsPermission ? !tilt.granted : true)
+  const showTiltChip = mobile && tilt.chip !== null
 
   // Particles stay out of the navigation and masthead: hidden above the
   // masthead rule, fading in just below it.
@@ -194,7 +194,7 @@ export default function Hero() {
               onClick={tilt.enable}
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
+              exit={{ opacity: 0, y: -6, transition: { duration: 0.3, delay: 0 } }}
               transition={{ duration: 0.5, ease, delay: 1.6 }}
               className="label flex w-fit items-center gap-2.5 border border-line px-3 py-2 text-ink"
             >
@@ -204,7 +204,7 @@ export default function Hero() {
                 animate={{ rotate: [0, -18, 18, 0] }}
                 transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
               />
-              Inclina tu teléfono
+              {tilt.chip === 'tap' ? 'Toca para activar · inclina tu teléfono' : 'Inclina tu teléfono'}
             </motion.button>
           )}
         </AnimatePresence>
