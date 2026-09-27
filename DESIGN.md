@@ -139,6 +139,13 @@ a su vecino.
   · Hero: más marcadas (1.1–3.4 px, opacidad 0.40–0.85), detrás del contenido.
   · Póster de filosofía: sutiles (0.6–2.2 px, opacidad 0.18–0.63) sobre negro.
 
+- Fin de caso de estudio (`ScrollToHome.tsx`): al llegar abajo, seguir
+  deslizando (rueda, dedo o teclado) sube la cortina de transición en
+  proporción al gesto; al cubrir la pantalla lleva al inicio. Si el visitante
+  se detiene, la cortina regresa sola. Incluye el botón “Volver al inicio”
+  para quien no siga deslizando. No interviene el scroll normal: solo actúa
+  cuando ya no hay más página.
+
 Prohibido en el resto del sitio: partículas, blur, glassmorphism, neón, 3D,
 scroll hijacking.
 

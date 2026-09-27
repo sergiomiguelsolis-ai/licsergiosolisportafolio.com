@@ -19,6 +19,7 @@ import Page from '../components/Page'
 import Pending from '../components/Pending'
 import { MaskLines, Reveal, Rule } from '../components/Reveal'
 import Footer from '../sections/Footer'
+import ScrollToHome from '../components/ScrollToHome'
 import NotFound from './NotFound'
 
 const layouts: Record<GalleryLayout, { cls: string; aspect: string }> = {
@@ -371,6 +372,7 @@ export default function ProjectPage() {
         <MoreProjects current={project} />
       </article>
       <Footer />
+      <ScrollToHome />
     </Page>
   )
 }
