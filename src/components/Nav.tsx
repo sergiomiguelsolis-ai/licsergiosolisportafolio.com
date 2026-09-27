@@ -7,10 +7,11 @@ import { useActiveSection } from '../hooks/useActiveSection'
 import { useGoTo } from '../hooks/useGoTo'
 import { cn, ease, easeInOut } from '../lib/motion'
 import Button from './Button'
+import FloatingTalk from './FloatingTalk'
 import Wordmark from './Wordmark'
 
 export default function Nav() {
-  const { scrollY } = useScroll()
+  const { scrollY, scrollYProgress } = useScroll()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const { pathname } = useLocation()
@@ -18,6 +19,19 @@ export default function Nav() {
   const goTo = useGoTo()
 
   useMotionValueEvent(scrollY, 'change', (v) => setScrolled(v > 40))
+
+  // Mobile: which numbered home section is on screen (01 hero … 07 contact)
+  const [section, setSection] = useState(1)
+  useMotionValueEvent(scrollY, 'change', () => {
+    if (pathname !== '/') return
+    const nodes = document.querySelectorAll<HTMLElement>('main > section[id]')
+    let current = 1
+    nodes.forEach((el, i) => {
+      if (el.getBoundingClientRect().top <= window.innerHeight * 0.45) current = i + 1
+    })
+    setSection(current)
+  })
+  const sectionCount = pathname === '/' ? document.querySelectorAll('main > section[id]').length : 0
 
   useEffect(() => setOpen(false), [pathname])
 
@@ -93,6 +107,11 @@ export default function Nav() {
             aria-expanded={open}
             aria-controls="mobile-menu"
           >
+            {!open && sectionCount > 0 && scrolled && (
+              <span className="tabular-nums text-muted">
+                <span className="text-red">{String(section).padStart(2, '0')}</span> / {String(sectionCount).padStart(2, '0')}
+              </span>
+            )}
             <span>{open ? 'Cerrar' : 'Menú'}</span>
             <span className="relative block h-2 w-5">
               <span
@@ -110,6 +129,12 @@ export default function Nav() {
             </span>
           </button>
         </div>
+        {/* Mobile reading progress — a hairline that fills with the scroll */}
+        <motion.span
+          aria-hidden
+          className="absolute inset-x-0 -bottom-px h-[2px] origin-left bg-red md:hidden"
+          style={{ scaleX: scrollYProgress, opacity: scrolled && !open ? 1 : 0 }}
+        />
       </header>
 
       <AnimatePresence>
@@ -158,6 +183,7 @@ export default function Nav() {
           </motion.div>
         )}
       </AnimatePresence>
+      <FloatingTalk hidden={open} />
     </>
   )
 }

@@ -1,7 +1,9 @@
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { AnimatePresence, motion, useScroll, useSpring, useTransform } from 'framer-motion'
 import { Fragment, useEffect, useRef, useState, type ReactNode } from 'react'
 import { site, whatsappUrl } from '../data/site'
 import { useGoTo } from '../hooks/useGoTo'
+import { useMediaQuery } from '../hooks/useMediaQuery'
+import { tiltNow, useTilt } from '../hooks/useTilt'
 import { INTRO_DELAY as D, cn, ease, easeInOut } from '../lib/motion'
 import Button from '../components/Button'
 import Particles from '../components/Particles'
@@ -11,6 +13,8 @@ import { AccentI } from '../components/Wordmark'
 // Stronger than the philosophy poster: bigger, denser-feeling dots on paper
 const HERO_SIZE: [number, number] = [1.1, 3.4]
 const HERO_ALPHA: [number, number] = [0.4, 0.85]
+/** Stable reference: the particle loop reads the live phone tilt through it */
+const tiltGravity = () => tiltNow
 
 function NameLine({ children, delay, className }: { children: ReactNode; delay: number; className?: string }) {
   return (
@@ -75,6 +79,17 @@ export default function Hero() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
   const lift = useTransform(scrollYProgress, [0, 1], ['0%', '-10%'])
 
+  // Phone tilt — mobile only (touch screen below the desktop breakpoint)
+  const mobile = useMediaQuery('(pointer: coarse) and (max-width: 1023px)')
+  const tilt = useTilt(mobile)
+  const tx = useSpring(tilt.x, { stiffness: 60, damping: 18 })
+  const ty = useSpring(tilt.y, { stiffness: 60, damping: 18 })
+  const nameX = useTransform(tx, (v) => v * 10)
+  const nameY = useTransform(ty, (v) => v * 6)
+  const nameRotY = useTransform(tx, (v) => v * 6)
+  const nameRotX = useTransform(ty, (v) => v * -5)
+  const showTiltChip = mobile && !tilt.moved && (tilt.needsPermission ? !tilt.granted : true)
+
   // Particles stay out of the navigation and masthead: hidden above the
   // masthead rule, fading in just below it.
   const ruleRef = useRef<HTMLDivElement>(null)
@@ -106,6 +121,7 @@ export default function Hero() {
         radius={170}
         size={HERO_SIZE}
         alpha={HERO_ALPHA}
+        gravity={mobile ? tiltGravity : undefined}
       />
 
       <h1 className="sr-only">
@@ -137,7 +153,9 @@ export default function Hero() {
       </div>
 
       {/* Name composition — interlocking, asymmetric */}
-      <motion.div aria-hidden className="relative mt-auto pt-12 md:pt-16" style={{ y: lift }}>
+      <motion.div aria-hidden className="relative mt-auto pt-12 [perspective:900px] md:pt-16" style={{ y: lift }}>
+        {/* Tilt layer (mobile): the name leans with the phone */}
+        <motion.div style={mobile ? { x: nameX, y: nameY, rotateX: nameRotX, rotateY: nameRotY } : undefined}>
         <div className="flex items-end justify-between gap-6">
           <NameLine delay={D}>SERGIO</NameLine>
           <Reveal onMount delay={D + 0.7} className="hidden self-start pt-[2.4vw] lg:block lg:w-[22vw]">
@@ -161,6 +179,7 @@ export default function Hero() {
             </NameLine>
           </span>
         </div>
+        </motion.div>
       </motion.div>
 
       {/* Compact composition below lg */}
@@ -168,6 +187,27 @@ export default function Hero() {
         <Profession />
         <Tagline className="t-lead max-w-[34ch] text-ink/80" />
         <Location className="label flex flex-col gap-2" />
+        <AnimatePresence>
+          {showTiltChip && (
+            <motion.button
+              type="button"
+              onClick={tilt.enable}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.5, ease, delay: 1.6 }}
+              className="label flex w-fit items-center gap-2.5 border border-line px-3 py-2 text-ink"
+            >
+              <motion.span
+                aria-hidden
+                className="block size-2 bg-red"
+                animate={{ rotate: [0, -18, 18, 0] }}
+                transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+              />
+              Inclina tu teléfono
+            </motion.button>
+          )}
+        </AnimatePresence>
       </Reveal>
 
       {/* Footer bar */}

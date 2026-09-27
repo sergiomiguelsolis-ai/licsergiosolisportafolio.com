@@ -259,7 +259,7 @@
     color: transparent;
     background-image:
       radial-gradient(
-        circle var(--spot-r) at var(--sx) var(--sy),
+        circle calc(var(--spot-r) * var(--spot-k, 1)) at var(--sx) var(--sy),
         var(--color-red) 0%,
         var(--color-red) 22%,
         rgb(200 16 46 / 0) 78%

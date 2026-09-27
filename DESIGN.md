@@ -146,6 +146,21 @@ a su vecino.
   para quien no siga deslizando. No interviene el scroll normal: solo actúa
   cuando ya no hay más página.
 
+### Solo en celular (pantalla táctil < 1024 px)
+
+- Halo táctil (`useSpotlight`): los títulos con `.spot` se tiñen de rojo bajo
+  el dedo mientras toca/arrastra; al soltar, el halo crece un poco y se
+  desvanece (`--spot-k`), dejando un destello.
+- Inclinación (`useTilt`): el nombre del hero se inclina en profundidad
+  (±10 px, ±6°) y las partículas “caen” hacia el lado bajo. Se calibra con la
+  primera lectura. En navegadores que piden permiso del sensor (iPhone, Chrome
+  reciente) aparece el botón “Inclina tu teléfono”; en los demás se oculta al
+  detectar la primera inclinación.
+- Menú: línea roja de progreso de lectura bajo la barra y número de sección
+  (02 / 07) junto a “Menú” en la home.
+- Botón flotante “Hablemos” (WhatsApp) abajo a la derecha: aparece al pasar el
+  hero; se oculta en Contacto, al final de la página y con el menú abierto.
+
 Prohibido en el resto del sitio: partículas, blur, glassmorphism, neón, 3D,
 scroll hijacking.
 

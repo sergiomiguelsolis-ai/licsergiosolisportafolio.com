@@ -28,6 +28,8 @@ interface ParticlesProps {
   alpha?: [number, number]
   /** Share of "accent" particles: larger, more intense and faster, for variety */
   accent?: number
+  /** Optional pull, read every frame (e.g. phone tilt), each axis -1…1 */
+  gravity?: () => { x: number; y: number }
 }
 
 const BRAND_RED: [number, number, number] = [200, 16, 46]
@@ -47,6 +49,7 @@ export default function Particles({
   size = SIZE,
   alpha = ALPHA,
   accent = 0.12,
+  gravity,
 }: ParticlesProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -128,6 +131,12 @@ export default function Particles({
           p.vx += (dx / d) * force
           p.vy += (dy / d) * force
         }
+        // phone tilt (mobile hero): particles drift toward the lower side
+        if (gravity) {
+          const g = gravity()
+          p.vx += g.x * 0.05
+          p.vy += g.y * 0.05
+        }
         // ease back to the resting drift
         p.vx = p.vx * 0.93 + p.bx * 0.07
         p.vy = p.vy * 0.93 + p.by * 0.07
@@ -184,7 +193,7 @@ export default function Particles({
       host.removeEventListener('pointerleave', onLeave)
       host.removeEventListener('pointercancel', onLeave)
     }
-  }, [rgb, density, radius, size, alpha, accent])
+  }, [rgb, density, radius, size, alpha, accent, gravity])
 
   return (
     <canvas ref={canvasRef} aria-hidden style={style} className={cn('pointer-events-none absolute inset-0', className)} />
