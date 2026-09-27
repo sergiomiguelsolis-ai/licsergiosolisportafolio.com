@@ -60,7 +60,11 @@ export default function PostCarousel({
     if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1)
   }
 
-  const track = reduce ? items : [...items, ...items]
+  // Short sets are repeated so one pass is always wider than the screen —
+  // otherwise a gap would show before the loop restarts.
+  const reps = Math.max(1, Math.ceil(10 / n))
+  const base = Array.from({ length: reps }, () => items).flat()
+  const track = reduce ? items : [...base, ...base]
 
   return (
     <>
@@ -73,7 +77,7 @@ export default function PostCarousel({
         <ul
           // ~6.5 s per piece: slow enough to read a post and click it. Set on the
           // element itself — a custom property would be resolved at :root.
-          style={{ animationDuration: `${n * 6.5}s` }}
+          style={{ animationDuration: `${base.length * 6.5}s` }}
           className={cn(
             'flex w-max py-1',
             !reduce && 'animate-marquee',

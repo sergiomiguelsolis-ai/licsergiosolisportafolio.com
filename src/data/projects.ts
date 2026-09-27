@@ -207,6 +207,60 @@ export const projects: Project[] = [
     tone: '#DCE2F5',
   },
   {
+    slug: 'rocking-baja-festival',
+    title: 'Rocking Baja Festival',
+    titleLines: ['Rocking Baja', 'Festival'],
+    year: '2022',
+    category: ['brand', 'print', 'content', 'digital'],
+    disciplines: [
+      'Identidad del festival',
+      'Ilustración',
+      'Cartel y publicidad impresa',
+      'Contenido para redes sociales',
+      'Mapa de zonas',
+    ],
+    role: 'Diseñador gráfico de cabecera — ROI Imagen Integral',
+    description:
+      'Identidad, ilustración y campaña gráfica del Rocking Baja Festival 2022, con Molotov como acto principal, en Ensenada.',
+    overview:
+      'Rocking Baja Festival reunió en el Estadio Valle Dorado de Ensenada a Molotov, Tokadiscos, Takón Machine, La Sucursal de la Cumbia, Son Santo e Hipogrifos el 17 de septiembre de 2022. Como diseñador gráfico de cabecera en ROI Imagen Integral diseñé el logotipo y la ilustración del cartel, y llevé la identidad a toda la campaña: espectaculares, publicaciones e historias para redes sociales, stickers y el mapa de zonas del evento.',
+    visualDirection: {
+      text: 'Una identidad con actitud de rock: amarillo intenso sobre negro, tipografía condensada y áspera con una guitarra como separador, y una ilustración con la ballena, la ola y el paisaje de Baja California que ancla el festival a Ensenada.',
+      palette: ['#FFC830', '#000000', '#FFFFFF'], // tomados de los stickers y el cartel
+      typefaces: [],
+    },
+    details: [
+      { label: 'Estudio', value: 'ROI Imagen Integral' },
+      { label: 'Evento', value: '17 de septiembre de 2022 — Estadio Valle Dorado, Ensenada, B.C.' },
+      {
+        label: 'Piezas',
+        value: 'Logotipo, insignia, ilustración, cartel oficial, espectaculares, publicaciones e historias para redes sociales, stickers y mapa de zonas',
+      },
+    ],
+    heroImage: '/projects/rocking-baja-festival/portada.webp',
+    gallery: [
+      { src: '/projects/rocking-baja-festival/logotipo.webp', layout: 'half', aspect: '1/1', caption: 'Logotipo' },
+      { src: '/projects/rocking-baja-festival/logo-calavera.webp', layout: 'half', aspect: '1/1', caption: 'Insignia' },
+      { src: '/projects/rocking-baja-festival/stickers.webp', layout: 'full', aspect: '3/2', caption: 'Stickers' },
+      {
+        src: '',
+        layout: 'carousel',
+        caption: 'Campaña — publicidad y redes sociales',
+        items: [
+          { src: '/projects/rocking-baja-festival/post-cartel.webp', aspect: '2396/2400' },
+          { src: '/projects/rocking-baja-festival/post-molotov.webp', aspect: '2000/2000' },
+          { src: '/projects/rocking-baja-festival/cartel.webp', aspect: '1535/2400' },
+          { src: '/projects/rocking-baja-festival/historia-line-up.webp', aspect: '1080/1980' },
+          { src: '/projects/rocking-baja-festival/lona-espectacular-2.webp', aspect: '2400/1339' },
+        ],
+      },
+      { src: '/projects/rocking-baja-festival/cartel.webp', layout: 'portrait', aspect: '1535/2400', caption: 'Cartel oficial' },
+      { src: '/projects/rocking-baja-festival/mapa-zonas.webp', layout: 'offset-left', aspect: '1/1', caption: 'Mapa de zonas' },
+    ],
+    featured: true,
+    tone: '#1A1A1A',
+  },
+  {
     slug: 'terracork-mexico',
     title: 'Terracork México',
     year: '2025',

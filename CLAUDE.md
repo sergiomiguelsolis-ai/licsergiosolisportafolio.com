@@ -15,7 +15,8 @@ React · Vite · TypeScript · Tailwind 4 · Framer Motion · GSAP. Sitio en esp
   En el hero se muestra “Lic. Diseño Gráfico.”
 - Paleta: blanco / negro / rojo `#C8102E`. El rojo es acento, nunca superficie —
   única excepción: la franja roja del hero bajo el menú (texto blanco, detalles negros).
-- Proyectos (en este orden): ACMEDIOS, KIDORA, TerraCork México, Constructora JM&R,
+- Proyectos (en este orden): ACMEDIOS, KIDORA, Rocking Baja Festival (2022, vía ROI),
+  TerraCork México, Constructora JM&R,
   Belleciia, Construcciones Colín. Beach House Studio queda fuera. No mencionar FRESKO.
 - KIDORA es negocio propio de Sergio, pero NO se menciona en el sitio; se presenta
   como proyecto de diseño. El reel de KIDORA no se publica. Tipografía pendiente
