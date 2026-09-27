@@ -22,6 +22,12 @@
 
   --animate-scrollcue: scrollcue 2s cubic-bezier(0.76, 0, 0.24, 1) infinite;
   --animate-pulse-dot: pulsedot 2.4s ease-out infinite;
+  --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
 
   @keyframes scrollcue {
     0% { transform: translateY(-100%); }

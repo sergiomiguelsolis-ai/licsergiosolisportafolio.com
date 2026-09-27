@@ -16,6 +16,8 @@
  *   'offset-left'  8 columnas alineadas a la izquierda, 3:2
  *   'offset-right' 8 columnas alineadas a la derecha, 3:2
  *   'portrait'     5 columnas alineadas a la derecha, 4:5
+ *   'carousel'     tira a todo lo ancho que se desplaza sola; clic = ampliar.
+ *                  Lleva `items: [{ src, aspect: 'ancho/alto' }, …]`
  * `aspect` reemplaza la proporción por defecto, p. ej. '1/1'.
  */
 
@@ -29,13 +31,24 @@ export const areas: { id: Area; label: string }[] = [
   { id: 'print', label: 'Impresión' },
 ]
 
-export type GalleryLayout = 'full' | 'wide' | 'half' | 'offset-left' | 'offset-right' | 'portrait'
+export type GalleryLayout = 'full' | 'wide' | 'half' | 'offset-left' | 'offset-right' | 'portrait' | 'carousel'
+
+export interface CarouselItem {
+  src: string
+  /** Real proportions 'w/h' — reserves space so the moving track doesn't jump */
+  aspect: string
+}
 
 export interface GalleryItem {
   src: string
   caption?: string
   layout: GalleryLayout
   aspect?: string
+  /**
+   * layout: 'carousel' — a strip of pieces that drifts right-to-left on its own;
+   * clicking one opens it enlarged. `src` is ignored for carousels.
+   */
+  items?: CarouselItem[]
 }
 
 /** Home card composition: 'feature' (16:9 wide), 'split' (3:2 right), 'pair' (4:5 + detail) */
@@ -161,7 +174,7 @@ export const projects: Project[] = [
     ],
     heroImage: '/projects/kidora/portada.webp', // logo sobre azul de marca
     gallery: [
-      { src: '/projects/kidora/logotipo.webp', layout: 'full', caption: 'Logotipo' },
+      { src: '/projects/kidora/portada-facebook.webp', layout: 'wide', aspect: '12/5', caption: 'Portada para Facebook' },
       { src: '/projects/kidora/mascota.webp', layout: 'half', aspect: '1/1', caption: 'Mascota' },
       { src: '/projects/kidora/flyer-bubble-house.webp', layout: 'half', aspect: '1/1', caption: 'Flyer — Bubble House' },
       { src: '/projects/kidora/iconos.webp', layout: 'wide', aspect: '4/1', caption: 'Sistema de íconos' },
@@ -171,10 +184,24 @@ export const projects: Project[] = [
       { src: '/projects/kidora/playera.webp', layout: 'offset-left', aspect: '1502/974', caption: 'Uniforme' },
       { src: '/projects/kidora/reglamento-bubble-house.webp', layout: 'half', aspect: '1023/1537', caption: 'Reglamento — Bubble House' },
       { src: '/projects/kidora/reglamento-soft-play.webp', layout: 'half', aspect: '1023/1537', caption: 'Reglamento — Soft Play' },
-      { src: '/projects/kidora/post-la-fiesta-pasa.webp', layout: 'half', aspect: '1/1', caption: 'Redes sociales' },
-      { src: '/projects/kidora/post-una-fiesta.webp', layout: 'half', aspect: '1/1', caption: 'Redes sociales' },
-      { src: '/projects/kidora/post-castillo-inflable.webp', layout: 'half', aspect: '4/5', caption: 'Publicidad — Castillo inflable' },
-      { src: '/projects/kidora/foto-letras-luminosas.webp', layout: 'half', aspect: '4/5', caption: 'Fotografía de producto' },
+      {
+        src: '',
+        layout: 'carousel',
+        caption: 'Publicaciones para redes sociales',
+        items: [
+          { src: '/projects/kidora/post-01.webp', aspect: '1600/1600' },
+          { src: '/projects/kidora/post-02.webp', aspect: '1086/1448' },
+          { src: '/projects/kidora/post-03.webp', aspect: '1080/1350' },
+          { src: '/projects/kidora/post-la-fiesta-pasa.webp', aspect: '1254/1254' },
+          { src: '/projects/kidora/post-04.webp', aspect: '1080/1350' },
+          { src: '/projects/kidora/post-05.webp', aspect: '1600/1600' },
+          { src: '/projects/kidora/post-06.webp', aspect: '1600/1600' },
+          { src: '/projects/kidora/post-una-fiesta.webp', aspect: '1254/1254' },
+          { src: '/projects/kidora/post-07.webp', aspect: '1254/1254' },
+          { src: '/projects/kidora/post-08.webp', aspect: '900/1600' },
+        ],
+      },
+      { src: '/projects/kidora/foto-letras-luminosas.webp', layout: 'portrait', aspect: '4/5', caption: 'Fotografía de producto' },
     ],
     featured: true,
     tone: '#DCE2F5',

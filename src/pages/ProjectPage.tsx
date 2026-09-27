@@ -14,6 +14,7 @@ import { SECTIONS_MOUNTED } from '../hooks/useActiveSection'
 import { INTRO_DELAY, cn } from '../lib/motion'
 import { ArrowSwap } from '../components/Arrow'
 import Media from '../components/Media'
+import PostCarousel from '../components/PostCarousel'
 import Page from '../components/Page'
 import Pending from '../components/Pending'
 import { MaskLines, Reveal, Rule } from '../components/Reveal'
@@ -27,6 +28,7 @@ const layouts: Record<GalleryLayout, { cls: string; aspect: string }> = {
   'offset-left': { cls: 'col-span-4 md:col-span-8', aspect: '3/2' },
   'offset-right': { cls: 'col-span-4 md:col-span-8 md:col-start-5', aspect: '3/2' },
   portrait: { cls: 'col-span-4 md:col-span-5 md:col-start-7', aspect: '4/5' },
+  carousel: { cls: 'col-span-4 md:col-span-12', aspect: '' },
 }
 
 /** One numbered chapter of a case study: label on the left, content on the right. */
@@ -287,13 +289,32 @@ export default function ProjectPage() {
               <span>Imágenes del proyecto</span>
             </p>
             <span className="label tabular-nums text-muted">
-              {project.gallery.length ? `${pad(project.gallery.length)} imágenes` : 'Por agregar'}
+              {project.gallery.length ? `${pad(project.gallery.reduce((t, g) => t + (g.items?.length || 1), 0))} imágenes` : 'Por agregar'}
             </span>
           </Reveal>
           <div className="grid-editorial gap-y-[clamp(2.5rem,5vw,5rem)]">
             {images.map((g, k) => {
               const l = layouts[g.layout]
               const aspect = g.aspect || l.aspect
+              // Pixel-exact ratios (e.g. 1250/764) aren't worth printing in the caption
+              const ratio = aspect.split('/').every((v) => Number(v) <= 30) ? aspect.replace('/', ':') : ''
+
+              if (g.layout === 'carousel' && g.items?.length) {
+                return (
+                  <figure key={k} className={cn(l.cls)}>
+                    <PostCarousel items={g.items} title={g.caption || project.title} />
+                    <figcaption className="label mt-3 flex justify-between gap-4 text-muted">
+                      <span>
+                        <span className="tabular-nums text-red">{pad(k + 1)}</span> {g.caption}
+                      </span>
+                      <span className="tabular-nums">
+                        {pad(g.items.length)} piezas · clic para ampliar
+                      </span>
+                    </figcaption>
+                  </figure>
+                )
+              }
+
               return (
                 <figure key={k} className={cn(l.cls)}>
                   <Media
@@ -310,7 +331,7 @@ export default function ProjectPage() {
                     <span>
                       <span className="tabular-nums text-red">{pad(k + 1)}</span> {g.caption}
                     </span>
-                    <span className="tabular-nums">{aspect.replace('/', ':')}</span>
+                    <span className="tabular-nums">{ratio}</span>
                   </figcaption>
                 </figure>
               )

@@ -22,10 +22,11 @@ const defaultAspect: Record<GalleryItem['layout'], string> = {
   'offset-left': '3/2',
   'offset-right': '3/2',
   portrait: '4/5',
+  carousel: '1/1',
 }
 /** First vertical piece of the gallery — the natural partner for a portrait cover */
 const portraitDetail = (gallery: GalleryItem[]) =>
-  (gallery.find((g) => ratioOf(g.aspect || defaultAspect[g.layout]) < 1) ?? gallery[0])?.src
+  (gallery.filter((g) => g.src).find((g) => ratioOf(g.aspect || defaultAspect[g.layout]) < 1) ?? gallery[0])?.src
 
 interface CardProps {
   project: Project
