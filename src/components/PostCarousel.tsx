@@ -1,5 +1,5 @@
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { useCallback, useEffect, useRef, useState, type CSSProperties, type PointerEvent } from 'react'
+import { useCallback, useEffect, useRef, useState, type PointerEvent } from 'react'
 import { pad, type CarouselItem } from '../data/projects'
 import { cn, ease } from '../lib/motion'
 import { Arrow } from './Arrow'
@@ -59,10 +59,11 @@ export default function PostCarousel({ items, title }: { items: CarouselItem[]; 
           'group/marquee relative -mx-[var(--gutter)] [mask-image:linear-gradient(to_right,transparent,#000_5%,#000_95%,transparent)]',
           reduce ? 'overflow-x-auto' : 'overflow-hidden',
         )}
-        // ~8 s per piece: slow enough to read a post and click it
-        style={{ '--marquee-duration': `${n * 8}s` } as CSSProperties}
       >
         <ul
+          // ~6.5 s per piece: slow enough to read a post and click it. Set on the
+          // element itself — a custom property would be resolved at :root.
+          style={{ animationDuration: `${n * 6.5}s` }}
           className={cn(
             'flex w-max py-1',
             !reduce && 'animate-marquee group-hover/marquee:[animation-play-state:paused] group-focus-within/marquee:[animation-play-state:paused]',
