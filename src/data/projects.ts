@@ -130,6 +130,56 @@ export const projects: Project[] = [
     tone: '#E1E3EA',
   },
   {
+    slug: 'kidora',
+    title: 'KIDORA',
+    year: '2026',
+    category: ['brand', 'print', 'content', 'digital'],
+    disciplines: [
+      'Identidad de marca',
+      'Mascota e iconografía',
+      'Material impreso',
+      'Publicidad para redes sociales',
+      'Fotografía',
+    ],
+    role: 'Diseñador gráfico de cabecera',
+    description:
+      'Identidad de marca, publicidad y material impreso para KIDORA, renta de inflables y soft play para fiestas infantiles en Ensenada.',
+    overview:
+      'KIDORA ofrece renta de inflables, soft play y Bubble House para fiestas infantiles en Ensenada. Desarrollé su identidad completa —logotipo, mascota y sistema de íconos— y la llevé a tarjetas de presentación con arte final para imprenta, uniformes, reglamentos de uso para cada juego, publicidad para redes sociales y la fotografía de sus productos.',
+    visualDirection: {
+      text: 'Una identidad lúdica y clara: un gorila amigable como mascota, un globo amarillo integrado en la O del logotipo y una paleta de azul intenso con amarillo, acompañada de formas redondeadas, estrellas y serpentinas que se repiten en todas las piezas.',
+      palette: ['#263ED0', '#FEDC19', '#F5B815', '#FFFFFF'], // tomados del archivo del logotipo
+      typefaces: [], // TODO: confirmar con el manual de marca (Sergio lo subirá)
+    },
+    details: [
+      { label: 'Equipo', value: 'Único diseñador del proyecto' },
+      {
+        label: 'Piezas',
+        value: 'Logotipo, mascota, sistema de íconos, tarjetas de presentación, playera, reglamentos de uso, publicaciones y flyers para redes sociales, fotografía de producto',
+      },
+      { label: 'Impresión', value: 'Tarjetas de 90 × 55 mm, imposición de 21 por pliego tabloide (11 × 17 in)' },
+    ],
+    heroImage: '/projects/kidora/portada.webp', // logo sobre azul de marca
+    gallery: [
+      { src: '/projects/kidora/logotipo.webp', layout: 'full', caption: 'Logotipo' },
+      { src: '/projects/kidora/mascota.webp', layout: 'half', aspect: '1/1', caption: 'Mascota' },
+      { src: '/projects/kidora/flyer-bubble-house.webp', layout: 'half', aspect: '1/1', caption: 'Flyer — Bubble House' },
+      { src: '/projects/kidora/iconos.webp', layout: 'wide', aspect: '4/1', caption: 'Sistema de íconos' },
+      { src: '/projects/kidora/tarjeta-frente.webp', layout: 'half', aspect: '1250/764', caption: 'Tarjeta — frente' },
+      { src: '/projects/kidora/tarjeta-reverso.webp', layout: 'half', aspect: '1250/764', caption: 'Tarjeta — reverso' },
+      { src: '/projects/kidora/arte-final-tarjetas.webp', layout: 'portrait', aspect: '1553/2400', caption: 'Arte final para imprenta' },
+      { src: '/projects/kidora/playera.webp', layout: 'offset-left', aspect: '1502/974', caption: 'Uniforme' },
+      { src: '/projects/kidora/reglamento-bubble-house.webp', layout: 'half', aspect: '1023/1537', caption: 'Reglamento — Bubble House' },
+      { src: '/projects/kidora/reglamento-soft-play.webp', layout: 'half', aspect: '1023/1537', caption: 'Reglamento — Soft Play' },
+      { src: '/projects/kidora/post-la-fiesta-pasa.webp', layout: 'half', aspect: '1/1', caption: 'Redes sociales' },
+      { src: '/projects/kidora/post-una-fiesta.webp', layout: 'half', aspect: '1/1', caption: 'Redes sociales' },
+      { src: '/projects/kidora/post-castillo-inflable.webp', layout: 'half', aspect: '4/5', caption: 'Publicidad — Castillo inflable' },
+      { src: '/projects/kidora/foto-letras-luminosas.webp', layout: 'half', aspect: '4/5', caption: 'Fotografía de producto' },
+    ],
+    featured: true,
+    tone: '#DCE2F5',
+  },
+  {
     slug: 'terracork-mexico',
     title: 'Terracork México',
     year: '2025',
