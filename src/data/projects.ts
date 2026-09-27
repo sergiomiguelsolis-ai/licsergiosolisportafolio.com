@@ -218,12 +218,13 @@ export const projects: Project[] = [
       'Cartel y publicidad impresa',
       'Contenido para redes sociales',
       'Mapa de zonas',
+      'Merch y acreditaciones',
     ],
     role: 'Diseñador gráfico de cabecera — ROI Imagen Integral',
     description:
       'Identidad, ilustración y campaña gráfica del Rocking Baja Festival 2022, con Molotov como acto principal, en Ensenada.',
     overview:
-      'Rocking Baja Festival reunió en el Estadio Valle Dorado de Ensenada a Molotov, Tokadiscos, Takón Machine, La Sucursal de la Cumbia, Son Santo e Hipogrifos el 17 de septiembre de 2022. Como diseñador gráfico de cabecera en ROI Imagen Integral diseñé el logotipo y la ilustración del cartel, y llevé la identidad a toda la campaña: espectaculares, publicaciones e historias para redes sociales, stickers y el mapa de zonas del evento.',
+      'Rocking Baja Festival reunió en el Estadio Valle Dorado de Ensenada a Molotov, Tokadiscos, Takón Machine, La Sucursal de la Cumbia, Son Santo e Hipogrifos el 17 de septiembre de 2022. Como diseñador gráfico de cabecera en ROI Imagen Integral diseñé el logotipo y la ilustración del cartel, y llevé la identidad a toda la campaña: espectaculares, publicaciones e historias para redes sociales, stickers, camisetas oficiales, gafetes de acceso VIP y el mapa de zonas del evento.',
     visualDirection: {
       text: 'Una identidad con actitud de rock: amarillo intenso sobre negro, tipografía condensada y áspera con una guitarra como separador, y una ilustración con la ballena, la ola y el paisaje de Baja California que ancla el festival a Ensenada.',
       palette: ['#FFC830', '#000000', '#FFFFFF'], // tomados de los stickers y el cartel
@@ -234,7 +235,7 @@ export const projects: Project[] = [
       { label: 'Evento', value: '17 de septiembre de 2022 — Estadio Valle Dorado, Ensenada, B.C.' },
       {
         label: 'Piezas',
-        value: 'Logotipo, insignia, ilustración, cartel oficial, espectaculares, publicaciones e historias para redes sociales, stickers y mapa de zonas',
+        value: 'Logotipo, insignia, ilustración, cartel oficial, espectaculares, publicaciones e historias para redes sociales, stickers, camisetas oficiales, gafetes de acceso VIP y mapa de zonas',
       },
     ],
     heroImage: '/projects/rocking-baja-festival/portada.webp',
@@ -242,6 +243,10 @@ export const projects: Project[] = [
       { src: '/projects/rocking-baja-festival/logotipo.webp', layout: 'half', aspect: '1/1', caption: 'Logotipo' },
       { src: '/projects/rocking-baja-festival/logo-calavera.webp', layout: 'half', aspect: '1/1', caption: 'Insignia' },
       { src: '/projects/rocking-baja-festival/stickers.webp', layout: 'full', aspect: '3/2', caption: 'Stickers' },
+      { src: '/projects/rocking-baja-festival/camisetas.webp', layout: 'full', aspect: '3500/2300', caption: 'Camisetas oficiales' },
+      { src: '/projects/rocking-baja-festival/camiseta-espalda.webp', layout: 'half', aspect: '1/1', caption: 'Camiseta — cartel en la espalda' },
+      { src: '/projects/rocking-baja-festival/post-camisetas.webp', layout: 'half', aspect: '1/1', caption: 'Publicación — camisetas' },
+      { src: '/projects/rocking-baja-festival/gafete-vip.webp', layout: 'offset-right', aspect: '4000/2725', caption: 'Gafete de acceso VIP' },
       {
         src: '',
         layout: 'carousel',
@@ -350,22 +355,28 @@ export const projects: Project[] = [
     title: 'Construcciones Colín',
     year: '2025',
     category: ['brand', 'web', 'digital', 'content'],
-    disciplines: ['Rediseño de logotipo', 'Diseño web', 'Contenido para redes sociales'],
+    disciplines: ['Rediseño de logotipo', 'Diseño web', 'Contenido para redes sociales', 'Patrocinio deportivo', 'Presentaciones comerciales'],
     role: 'Diseñador gráfico de cabecera',
     description:
-      'Rediseño de logotipo, sitio web y contenido para redes sociales de Construcciones Colín, empresa de ingeniería y arquitectura en Ensenada.',
+      'Rediseño de logotipo, sitio web, contenido y patrocinio deportivo para Construcciones Colín, empresa de ingeniería y arquitectura en Ensenada.',
     overview:
-      'Construcciones Colín es una empresa de ingeniería y arquitectura en Ensenada, con trayectoria desde 2011. Como único diseñador del proyecto, rediseñé su logotipo y desarrollé su sitio web y su contenido para redes sociales, aplicando su identidad roja de forma consistente en cada formato.',
+      'Construcciones Colín es una empresa de ingeniería y arquitectura en Ensenada, con trayectoria desde 2011. Como único diseñador del proyecto, rediseñé su logotipo y desarrollé su sitio web y su contenido para redes sociales, aplicando su identidad roja de forma consistente en cada formato. Colín también patrocina a atletas de artes marciales mixtas, y me encargo del diseño de ese patrocinio: carteles de pelea y de “patrocinador oficial”, y la playera del equipo, donde la marca convive con la imagen de cada peleador. Además diseño sus presentaciones comerciales de productos y servicios.',
     visualDirection: { text: '', palette: [], typefaces: [] },
     details: [
       { label: 'Equipo', value: 'Único diseñador del proyecto' },
-      { label: 'Piezas', value: 'Rediseño de logotipo, sitio web (servicios y contacto) y publicaciones para redes sociales' },
+      { label: 'Piezas', value: 'Rediseño de logotipo, sitio web (servicios y contacto), publicaciones para redes sociales y presentaciones comerciales' },
+      { label: 'Patrocinio', value: 'Carteles de pelea y de patrocinador oficial, y playera del equipo para atletas de artes marciales mixtas patrocinados por Colín' },
     ],
     heroImage: '/projects/construcciones-colin/sitio-web.webp',
     gallery: [
       { src: '/projects/construcciones-colin/logotipo.webp', layout: 'offset-left', aspect: '5/4', caption: 'Logotipo' },
       { src: '/projects/construcciones-colin/redes-sociales-01.webp', layout: 'half', caption: 'Redes sociales' },
       { src: '/projects/construcciones-colin/redes-sociales-02.webp', layout: 'half', caption: 'Redes sociales' },
+      { src: '/projects/construcciones-colin/presentacion-comercial.webp', layout: 'wide', aspect: '16/9', caption: 'Presentación comercial' },
+      { src: '/projects/construcciones-colin/patrocinio-carteles.webp', layout: 'full', aspect: '4/3', caption: 'Patrocinio deportivo — carteles de pelea' },
+      { src: '/projects/construcciones-colin/patrocinio-poster.webp', layout: 'portrait', aspect: '9/16', caption: 'Patrocinio deportivo — patrocinador oficial' },
+      { src: '/projects/construcciones-colin/patrocinio-playera-trasera.webp', layout: 'half', aspect: '1496/1366', caption: 'Playera del equipo — espalda' },
+      { src: '/projects/construcciones-colin/patrocinio-playera-frontal.webp', layout: 'half', aspect: '1496/1366', caption: 'Playera del equipo — frente' },
     ],
     featured: true,
     tone: '#E6DEDC',
