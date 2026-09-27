@@ -5,6 +5,7 @@ import { site } from '../data/site'
 import { ArrowSwap } from './Arrow'
 import Media from './Media'
 import MetaList from './MetaList'
+import PostCarousel from './PostCarousel'
 import Pending from './Pending'
 import { Reveal } from './Reveal'
 
@@ -110,24 +111,66 @@ export default function ProjectCard({ project, index, variant }: CardProps) {
   const label = `${project.title} — ver caso de estudio`
 
   if (variant === 'feature') {
+    const head = (
+      <>
+        <Reveal y={12} className="mb-4 flex items-center justify-between gap-6">
+          <Meta project={project} num={num} />
+          <span className="label shrink-0 tabular-nums text-muted">{project.year || '—'}</span>
+        </Reveal>
+        <Media src={cover} video={project.coverVideo} alt={project.title} aspect="16/9" tone={project.tone} slot={`${num} — Portada`} hint={hint} mark={num} hover parallax />
+      </>
+    )
+    const info = (
+      <>
+        <Reveal className="col-span-4 md:col-span-7">
+          <Title project={project} className="t-d1" />
+        </Reveal>
+        <Reveal delay={0.1} className="col-span-4 flex flex-col items-start gap-6 md:col-span-4 md:col-start-9 md:pt-3">
+          <Description project={project} />
+          <Sheet project={project} />
+          <ViewCase />
+        </Reveal>
+      </>
+    )
+
+    // A project with a social-media carousel shows it on its home card too,
+    // between the cover and the info. The carousel pieces are buttons (they
+    // open the viewer), so the card becomes two links around it — a button
+    // inside a link would navigate instead of opening the piece.
+    const carousel = project.gallery.find((g) => g.layout === 'carousel' && g.items?.length)
+
+    if (!carousel?.items) {
+      return (
+        <article>
+          <Link to={href} data-cursor="Ver" aria-label={label} className="group block">
+            {head}
+            <div className="grid-editorial mt-6 gap-y-6 md:mt-8">{info}</div>
+          </Link>
+        </article>
+      )
+    }
+
     return (
       <article>
         <Link to={href} data-cursor="Ver" aria-label={label} className="group block">
-          <Reveal y={12} className="mb-4 flex items-center justify-between gap-6">
-            <Meta project={project} num={num} />
-            <span className="label shrink-0 tabular-nums text-muted">{project.year || '—'}</span>
-          </Reveal>
-          <Media src={cover} video={project.coverVideo} alt={project.title} aspect="16/9" tone={project.tone} slot={`${num} — Portada`} hint={hint} mark={num} hover parallax />
-          <div className="grid-editorial mt-6 gap-y-6 md:mt-8">
-            <Reveal className="col-span-4 md:col-span-7">
-              <Title project={project} className="t-d1" />
-            </Reveal>
-            <Reveal delay={0.1} className="col-span-4 flex flex-col items-start gap-6 md:col-span-4 md:col-start-9 md:pt-3">
-              <Description project={project} />
-              <Sheet project={project} />
-              <ViewCase />
-            </Reveal>
-          </div>
+          {head}
+        </Link>
+        <Reveal y={12} className="mt-[var(--gap)]">
+          <PostCarousel
+            items={carousel.items}
+            title={carousel.caption || project.title}
+            itemClassName="h-[clamp(11rem,19vw,18rem)]"
+          />
+          <p className="label mt-3 flex justify-between gap-4 text-muted">
+            <span>{carousel.caption}</span>
+            <span className="shrink-0">
+              <span className="hidden md:inline">Clic para ampliar</span>
+              <span className="md:hidden">Toca para ampliar</span>
+            </span>
+          </p>
+        </Reveal>
+        <Link to={href} data-cursor="Ver" className="group grid-editorial mt-6 gap-y-6 md:mt-8">
+          {info}
         </Link>
       </article>
     )

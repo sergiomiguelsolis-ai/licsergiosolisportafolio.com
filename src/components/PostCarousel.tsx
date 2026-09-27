@@ -11,7 +11,16 @@ import { Arrow } from './Arrow'
  * enlarged (arrows, swipe and Esc inside). Under reduced motion it becomes
  * a plain horizontally scrollable row.
  */
-export default function PostCarousel({ items, title }: { items: CarouselItem[]; title: string }) {
+export default function PostCarousel({
+  items,
+  title,
+  itemClassName = 'h-[clamp(15rem,30vw,27rem)]',
+}: {
+  items: CarouselItem[]
+  title: string
+  /** Height of the pieces (the width follows each piece's own proportions) */
+  itemClassName?: string
+}) {
   const reduce = useReducedMotion()
   const [open, setOpen] = useState<number | null>(null)
   const n = items.length
@@ -86,7 +95,7 @@ export default function PostCarousel({ items, title }: { items: CarouselItem[]; 
                     opener.current = e.currentTarget
                     setOpen(i)
                   }}
-                  className="group/item block h-[clamp(15rem,30vw,27rem)] overflow-hidden bg-line"
+                  className={cn('group/item block overflow-hidden bg-line', itemClassName)}
                   style={{ aspectRatio: item.aspect }}
                 >
                   <img
