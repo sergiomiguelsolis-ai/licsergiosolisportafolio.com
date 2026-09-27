@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { Fragment, useEffect, useRef, useState, type ReactNode } from 'react'
 import { site, whatsappUrl } from '../data/site'
 import { useGoTo } from '../hooks/useGoTo'
-import { INTRO_DELAY as D, cn, ease } from '../lib/motion'
+import { INTRO_DELAY as D, cn, ease, easeInOut } from '../lib/motion'
 import Button from '../components/Button'
 import Particles from '../components/Particles'
 import { Reveal, Rule } from '../components/Reveal'
@@ -96,7 +96,7 @@ export default function Hero() {
       ref={ref}
       id="top"
       data-section=""
-      className="shell relative isolate flex min-h-[100svh] flex-col pb-6 pt-24 md:pb-8 md:pt-28"
+      className="shell relative isolate flex min-h-[100svh] flex-col overflow-x-clip pb-6 pt-24 md:pb-8 md:pt-28"
     >
       {/* Behind everything in the hero (isolate + -z-10) */}
       <Particles
@@ -112,21 +112,28 @@ export default function Hero() {
         Sergio Solís — {site.role} ({site.roleEn}) en Ensenada, Baja California, México
       </h1>
 
-      {/* Masthead */}
-      <Reveal onMount delay={D} y={10} className="grid-editorial label">
-        <div className="col-span-2 flex items-center gap-3 md:col-span-3">
-          <span className="tabular-nums text-red">01</span>
-          <span className="h-px w-6 bg-red" />
-          <span>Portafolio</span>
-        </div>
-        <div className="hidden text-muted md:col-span-4 md:col-start-5 md:block">Edición {site.year}</div>
-        <div className="col-span-2 text-right text-muted md:col-span-3 md:col-start-10 md:text-left">
-          <span className="hidden md:inline">Experiencia profesional desde {site.since}</span>
-          <span className="md:hidden">Desde {site.since}</span>
-        </div>
-      </Reveal>
-      <div ref={ruleRef}>
-        <Rule className="mt-4 bg-ink" delay={D} />
+      {/* Masthead — a red band across the full viewport, dividing the menu from
+          the hero. Inside it the palette flips: white text, black details. */}
+      <div ref={ruleRef} className="relative py-3.5 md:py-4">
+        <motion.span
+          aria-hidden
+          className="absolute inset-y-0 left-1/2 w-screen -translate-x-1/2 bg-red"
+          initial={{ clipPath: 'inset(0% 100% 0% 0%)' }}
+          animate={{ clipPath: 'inset(0% 0% 0% 0%)' }}
+          transition={{ duration: 1.1, ease: easeInOut, delay: D }}
+        />
+        <Reveal onMount delay={D + 0.35} y={8} className="grid-editorial label relative items-center text-white">
+          <div className="col-span-2 flex items-center gap-3 md:col-span-3">
+            <span className="tabular-nums text-ink">01</span>
+            <span className="h-px w-6 bg-ink" />
+            <span>Portafolio</span>
+          </div>
+          <div className="hidden text-white/80 md:col-span-4 md:col-start-5 md:block">Edición {site.year}</div>
+          <div className="col-span-2 text-right text-white/80 md:col-span-3 md:col-start-10 md:text-left">
+            <span className="hidden md:inline">Experiencia profesional desde {site.since}</span>
+            <span className="md:hidden">Desde {site.since}</span>
+          </div>
+        </Reveal>
       </div>
 
       {/* Name composition — interlocking, asymmetric */}
