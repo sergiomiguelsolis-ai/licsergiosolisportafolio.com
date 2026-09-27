@@ -134,8 +134,8 @@ export default function Particles({
         // phone tilt (mobile hero): particles drift toward the lower side
         if (gravity) {
           const g = gravity()
-          p.vx += g.x * 0.05
-          p.vy += g.y * 0.05
+          p.vx += g.x * 0.16
+          p.vy += g.y * 0.16
         }
         // ease back to the resting drift
         p.vx = p.vx * 0.93 + p.bx * 0.07

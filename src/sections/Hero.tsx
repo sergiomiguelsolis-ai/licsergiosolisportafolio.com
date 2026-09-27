@@ -82,12 +82,12 @@ export default function Hero() {
   // Phone tilt — mobile only (touch screen below the desktop breakpoint)
   const mobile = useMediaQuery('(pointer: coarse) and (max-width: 1023px)')
   const tilt = useTilt(mobile)
-  const tx = useSpring(tilt.x, { stiffness: 60, damping: 18 })
-  const ty = useSpring(tilt.y, { stiffness: 60, damping: 18 })
-  const nameX = useTransform(tx, (v) => v * 10)
-  const nameY = useTransform(ty, (v) => v * 6)
-  const nameRotY = useTransform(tx, (v) => v * 6)
-  const nameRotX = useTransform(ty, (v) => v * -5)
+  const tx = useSpring(tilt.x, { stiffness: 90, damping: 16 })
+  const ty = useSpring(tilt.y, { stiffness: 90, damping: 16 })
+  const nameX = useTransform(tx, (v) => v * 26)
+  const nameY = useTransform(ty, (v) => v * 16)
+  const nameRotY = useTransform(tx, (v) => v * 16)
+  const nameRotX = useTransform(ty, (v) => v * -12)
   const showTiltChip = mobile && tilt.chip !== null
 
   // Particles stay out of the navigation and masthead: hidden above the

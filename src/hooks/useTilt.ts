@@ -75,7 +75,7 @@ export function useTilt(enabled: boolean): {
       if (e.beta === null || e.gamma === null) return
       orientWorks = true
       if (!orientBase) orientBase = { beta: e.beta, gamma: e.gamma }
-      apply((e.gamma - orientBase.gamma) / 30, (e.beta - orientBase.beta) / 30)
+      apply((e.gamma - orientBase.gamma) / 18, (e.beta - orientBase.beta) / 18)
     }
 
     const onMotion = (e: DeviceMotionEvent) => {
@@ -86,7 +86,7 @@ export function useTilt(enabled: boolean): {
       const gx = (-g.x * flip) / 9.81
       const gy = (g.y * flip) / 9.81
       if (!motionBase) motionBase = { x: gx, y: gy }
-      apply((gx - motionBase.x) / 0.5, (gy - motionBase.y) / 0.5)
+      apply((gx - motionBase.x) / 0.3, (gy - motionBase.y) / 0.3)
     }
 
     const onTurn = () => {
