@@ -48,6 +48,8 @@
   }
 
   html {
+    /* Light only — tells browsers not to auto-darken the page */
+    color-scheme: only light;
     background: var(--color-paper);
     color: var(--color-ink);
     -webkit-font-smoothing: antialiased;

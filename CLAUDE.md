@@ -26,6 +26,8 @@ React · Vite · TypeScript · Tailwind 4 · Framer Motion · GSAP. Sitio en esp
 - Sin botones ni enlaces de CV (decisión del usuario).
 - Todos los “Hablemos” abren WhatsApp (`site.ts → whatsappUrl`).
 - Refinar, no rediseñar: los cambios se hacen sobre el diseño existente.
+- Siempre en modo claro: `color-scheme: only light` (meta + CSS) evita que Android/iOS
+  oscurezcan el sitio automáticamente. No quitarlo.
 
 ## Imágenes
 
